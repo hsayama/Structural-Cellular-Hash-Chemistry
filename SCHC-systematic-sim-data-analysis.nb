@@ -1,0 +1,492 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20125,        484]
+NotebookOptionsPosition[     18789,        454]
+NotebookOutlinePosition[     19221,        471]
+CellTagsIndexPosition[     19178,        468]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Structural Cellular Hash Chemistry
+Systematic Simulations: Data Analysis\
+\>", "Title",
+ CellChangeTimes->{{3.9434109454770412`*^9, 3.9434109675476456`*^9}, {
+  3.9434111671863327`*^9, 3.9434111712457886`*^9}, {3.94341257631707*^9, 
+  3.943412596202551*^9}},ExpressionUUID->"862f1744-f80b-7d4d-8eaa-\
+29f51907a9b4"],
+
+Cell["Hiroki Sayama (sayama@binghamton.edu)", "Subtitle",
+ CellChangeTimes->{{3.943410969177498*^9, 
+  3.943410987380451*^9}},ExpressionUUID->"d3aa9d9b-90ed-b74a-a000-\
+a619f4a79a79"],
+
+Cell[CellGroupData[{
+
+Cell["Selecting files", "Section",
+ CellChangeTimes->{{3.7350232495519037`*^9, 3.7350232522018547`*^9}, {
+  3.735023293780217*^9, 3.735023295029874*^9}, {3.7473063404017363`*^9, 
+  3.7473063443646507`*^9}},ExpressionUUID->"996b3cc3-a93b-403f-aa46-\
+d0c238a4e7a4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.735023317372954*^9, 3.735023323786839*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"1d3ddb42-1611-4b68-b038-d85aec8c3f5f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"filenames", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"FileNames", "[", "\"\<fhistory-final-*.dat\>\"", "]"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"FileSize", "[", "#", "]"}], ">", 
+       RowBox[{"1", 
+        NamespaceBox["LinguisticAssistant",
+         DynamicModuleBox[{Typeset`query$$ = "MB", Typeset`boxes$$ = 
+          TemplateBox[{
+            InterpretationBox["\[InvisibleSpace]", 1], "\"MB\"", "megabytes", 
+            "\"Megabytes\""}, "Quantity", SyntaxForm -> Mod], 
+          Typeset`allassumptions$$ = {{
+           "type" -> "Clash", "word" -> "MB", "template" -> 
+            "Assuming \"${word}\" is ${desc1}. Use as ${desc2} instead", 
+            "count" -> "3", 
+            "Values" -> {{
+              "name" -> "Unit", "desc" -> "a unit", "input" -> 
+               "*C.MB-_*Unit-"}, {
+              "name" -> "Protein", "desc" -> "a protein", "input" -> 
+               "*C.MB-_*Protein-"}, {
+              "name" -> "AdministrativeDivision", "desc" -> 
+               "an administrative division", "input" -> 
+               "*C.MB-_*AdministrativeDivision-"}}}, {
+           "type" -> "Unit", "word" -> "MB", "template" -> 
+            "Assuming ${desc1} for \"${word}\". Use ${desc2} instead", 
+            "count" -> "2", 
+            "Values" -> {{
+              "name" -> "Megabytes", "desc" -> "megabytes (base 10)", "input" -> 
+               "UnitClash_*MB.*Megabytes--"}, {
+              "name" -> "Mebibytes", "desc" -> "mebibytes (base 2)", "input" -> 
+               "UnitClash_*MB.*Mebibytes--"}}}}, Typeset`assumptions$$ = {}, 
+          Typeset`open$$ = {1, 2}, Typeset`querystate$$ = {
+          "Online" -> True, "Allowed" -> True, "mparse.jsp" -> 
+           0.5170551`7.165081819667046, "Messages" -> {}}}, 
+          DynamicBox[ToBoxes[
+            AlphaIntegration`LinguisticAssistantBoxes["", 4, Automatic, 
+             Dynamic[Typeset`query$$], 
+             Dynamic[Typeset`boxes$$], 
+             Dynamic[Typeset`allassumptions$$], 
+             Dynamic[Typeset`assumptions$$], 
+             Dynamic[Typeset`open$$], 
+             Dynamic[Typeset`querystate$$]], StandardForm],
+           ImageSizeCache->{123.3174469302399, {12., 22.536163330078125`}},
+           
+           TrackedSymbols:>{
+            Typeset`query$$, Typeset`boxes$$, Typeset`allassumptions$$, 
+             Typeset`assumptions$$, Typeset`open$$, Typeset`querystate$$}],
+          DynamicModuleValues:>{},
+          UndoTrackedVariables:>{Typeset`open$$}],
+         BaseStyle->{"Deploy"},
+         DeleteWithContents->True,
+         Editable->False,
+         SelectWithContents->True]}]}], "&"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.747305809614976*^9, 3.7473058293782797`*^9}, {
+   3.747305954416029*^9, 3.7473060041415052`*^9}, {3.747306117507136*^9, 
+   3.747306175162178*^9}, 3.747306486896837*^9, 3.9434125600065002`*^9, 
+   3.9434126272865562`*^9},
+ CellLabel->"In[2]:=",ExpressionUUID->"aa686c41-85e7-49c3-8492-a0afc545e1dd"],
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "filenames", "]"}]], "Input",
+ CellChangeTimes->{{3.747306348318474*^9, 3.747306351495103*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"f058dbe5-789c-4239-9169-9151138d9eb7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Generating aggregated data files", "Section",
+ CellChangeTimes->{{3.747306384314042*^9, 3.74730639865962*^9}, {
+  3.9434126920418873`*^9, 
+  3.9434127079321613`*^9}},ExpressionUUID->"b79ef7e1-359a-4a21-a065-\
+3c042e7362ff"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"maxFitnessSeries", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"meanFitnessSeries", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"numIndivEntitiesSeries", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"maxRepEventSeries", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"meanRepEventSeries", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nptypesSeries", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nctypesSeries", "=", 
+   RowBox[{"{", "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.747346153579403*^9, 3.7473461657785425`*^9}, {
+  3.747346200027429*^9, 3.747346204841009*^9}, {3.747346236663396*^9, 
+  3.74734632225894*^9}, {3.91398264371167*^9, 3.913982644755495*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"722f6e6f-30d2-43d3-92a5-39901b0512e4"],
+
+Cell[BoxData[
+ RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Do", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"t", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"ctypes", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"ptypes", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"maxFitnessList", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"meanFitnessList", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"numIndivEntitiesList", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"maxRepEventList", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"meanRepEventList", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"nptypesList", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"nctypesList", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"fitnesses", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"numIndivEntities", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"RepEvents", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"file", "=", 
+        RowBox[{"OpenRead", "[", "filename", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"While", "[", 
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"s", "=", 
+              RowBox[{"Read", "[", 
+               RowBox[{"file", ",", "Expression"}], "]"}]}], ")"}], "===", 
+            "EndOfFile"}], ")"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"s", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "==", "t"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "still", " ", "in", " ", "the", " ", "same", " ", "time", " ", 
+              "step"}], " ", "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"fitnesses", ",", 
+               RowBox[{"s", "[", 
+                RowBox[{"[", 
+                 RowBox[{"-", "1"}], "]"}], "]"}]}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"numIndiv", "=", 
+              RowBox[{"Count", "[", 
+               RowBox[{
+                RowBox[{"Last", "/@", 
+                 RowBox[{"s", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], ",", "_Integer"}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"numIndivEntities", "+=", "numIndiv"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"RepEvents", ",", 
+               RowBox[{"numIndiv", "//", "N"}]}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"ptypes", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{"ptypes", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"Last", "/@", 
+                   RowBox[{"s", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "//", 
+                 "Flatten"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"ctypes", ",", 
+               RowBox[{"Hash", "[", 
+                RowBox[{"s", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "]"}], ";"}], 
+            "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"time", " ", "step", " ", "has", " ", "changed"}], " ", 
+             "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"maxFitnessList", ",", 
+               RowBox[{"{", 
+                RowBox[{"t", ",", 
+                 RowBox[{"Max", "[", "fitnesses", "]"}]}], "}"}]}], "]"}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"meanFitnessList", ",", 
+               RowBox[{"{", 
+                RowBox[{"t", ",", 
+                 RowBox[{"Mean", "[", "fitnesses", "]"}]}], "}"}]}], "]"}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"numIndivEntitiesList", ",", 
+               RowBox[{"{", 
+                RowBox[{"t", ",", "numIndivEntities"}], "}"}]}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"maxRepEventList", ",", 
+               RowBox[{"{", 
+                RowBox[{"t", ",", 
+                 RowBox[{"Max", "[", "RepEvents", "]"}]}], "}"}]}], "]"}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"meanRepEventList", ",", 
+               RowBox[{"{", 
+                RowBox[{"t", ",", 
+                 RowBox[{"Mean", "[", "RepEvents", "]"}]}], "}"}]}], "]"}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"nptypesList", ",", 
+               RowBox[{"{", 
+                RowBox[{"t", ",", 
+                 RowBox[{"Length", "[", 
+                  RowBox[{"ptypes", "=", 
+                   RowBox[{"Union", "[", "ptypes", "]"}]}], "]"}]}], "}"}]}], 
+              "]"}], ";", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"nctypesList", ",", 
+               RowBox[{"{", 
+                RowBox[{"t", ",", 
+                 RowBox[{"Length", "[", 
+                  RowBox[{"ctypes", "=", 
+                   RowBox[{"Union", "[", "ctypes", "]"}]}], "]"}]}], "}"}]}], 
+              "]"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"t", "=", 
+              RowBox[{"s", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"fitnesses", "=", 
+              RowBox[{"{", 
+               RowBox[{"s", "[", 
+                RowBox[{"[", 
+                 RowBox[{"-", "1"}], "]"}], "]"}], "}"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"numIndiv", "=", 
+              RowBox[{"Count", "[", 
+               RowBox[{
+                RowBox[{"Last", "/@", 
+                 RowBox[{"s", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], ",", "_Integer"}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"numIndivEntities", "=", "numIndiv"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"RepEvents", "=", 
+              RowBox[{"{", 
+               RowBox[{"numIndiv", "//", "N"}], "}"}]}], ";"}]}], 
+           "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+        "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"maxFitnessList", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"Max", "[", "fitnesses", "]"}]}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"meanFitnessList", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"Mean", "[", "fitnesses", "]"}]}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"numIndivEntitiesList", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "numIndivEntities"}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"maxRepEventList", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"Max", "[", "RepEvents", "]"}]}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"meanRepEventList", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"Mean", "[", "RepEvents", "]"}]}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"nptypesList", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"Length", "[", 
+            RowBox[{"ptypes", "=", 
+             RowBox[{"Union", "[", "ptypes", "]"}]}], "]"}]}], "}"}]}], "]"}],
+        ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"nctypesList", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"Length", "[", 
+            RowBox[{"ctypes", "=", 
+             RowBox[{"Union", "[", "ctypes", "]"}]}], "]"}]}], "}"}]}], "]"}],
+        ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Close", "[", "file", "]"}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"maxFitnessSeries", ",", "maxFitnessList"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"meanFitnessSeries", ",", "meanFitnessList"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"numIndivEntitiesSeries", ",", "numIndivEntitiesList"}], 
+        "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"maxRepEventSeries", ",", "maxRepEventList"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"meanRepEventSeries", ",", "meanRepEventList"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"nptypesSeries", ",", "nptypesList"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"nctypesSeries", ",", "nctypesList"}], "]"}], ";"}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+      RowBox[{"{", 
+       RowBox[{"filename", ",", "filenames"}], "}"}]}], "\[IndentingNewLine]",
+      "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"filename", ",", 
+     RowBox[{"s", "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwd0Fsog3EYBvDPYUVjIikkk62RlSkXi2VhQuFCn9OVOazI12YRUw6jyaEh
+RTlNwhzngsQNuVlygZALYg4pRjMro68ovud/8fart/d9Lp64al2xxpeiKCE3
+UCGLXFpNfM9cYZ42IH1esw3bt993ockg2IdykeMYsqdyB/S37txBYX30K1F8
+w1vjNNsXVPDSKu6F4elJA7BZXTIEE2TiSVhbmTYNKe/qHfRYsx4gmyn1Xedk
+LG4/2H8oCYZm/kkYDNBOR8ByzVQUlF0zsdAQ0x4PPfebKdA22JcK9xYysqGp
+hsoluS/fReR/4oAme7e9kdy3PBNn+BInZPWPLugvH/+E1Jb5C44J8pUteVxf
+dFUWNDJChjhZqoeKQGcHVCVbumDQhaoX2nXzRCftGYLSitBheMYr5LVyerVm
+4qJh5K2bU83WuWDB1UdTD+fcz7IBimZ9ykeQ+xdO/D26LO2huX5jIsugKaRB
+A2+LjUSbcVQLRUVjOsjmrLdBtTK3E/4DwGz6tA==
+  "],
+ CellLabel->"In[11]:=",ExpressionUUID->"34268ad4-b63b-b840-9428-56626b62efbc"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<maxFitnessSeries.dat\>\"", ",", "maxFitnessSeries", ",", 
+    "\"\<Data\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<meanFitnessSeries.dat\>\"", ",", "meanFitnessSeries", ",", 
+    "\"\<Data\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<numIndivEntitiesSeries.dat\>\"", ",", "numIndivEntitiesSeries", ",", 
+    "\"\<Data\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<maxRepEventSeries.dat\>\"", ",", "maxRepEventSeries", ",", 
+    "\"\<Data\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<meanRepEventSeries.dat\>\"", ",", "meanRepEventSeries", ",", 
+    "\"\<Data\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<nctypesSeries.dat\>\"", ",", "nctypesSeries", ",", "\"\<Data\>\""}], 
+   "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+   "\"\<nptypesSeries.dat\>\"", ",", "nptypesSeries", ",", "\"\<Data\>\""}], 
+   "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.74737613223048*^9, 3.747376231012437*^9}, {
+  3.747469927477722*^9, 3.747469975416607*^9}, {3.9139826266243668`*^9, 
+  3.913982626948799*^9}, {3.914160573943497*^9, 3.914160576394457*^9}, {
+  3.914475884049221*^9, 3.91447589347298*^9}, {3.9303561652928123`*^9, 
+  3.9303561804236794`*^9}},
+ CellLabel->"In[12]:=",ExpressionUUID->"6dca9754-d3ee-49e5-9a1b-5900f01e6396"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 831.75},
+WindowMargins->{{-6, Automatic}, {Automatic, -6}},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"69518651-40dd-48c9-8b0a-a36a678c9dae"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 325, 7, 235, "Title",ExpressionUUID->"862f1744-f80b-7d4d-8eaa-29f51907a9b4"],
+Cell[908, 31, 183, 3, 78, "Subtitle",ExpressionUUID->"d3aa9d9b-90ed-b74a-a000-a619f4a79a79"],
+Cell[CellGroupData[{
+Cell[1116, 38, 263, 4, 99, "Section",ExpressionUUID->"996b3cc3-a93b-403f-aa46-d0c238a4e7a4"],
+Cell[1382, 44, 267, 5, 42, "Input",ExpressionUUID->"1d3ddb42-1611-4b68-b038-d85aec8c3f5f"],
+Cell[1652, 51, 3040, 61, 54, "Input",ExpressionUUID->"aa686c41-85e7-49c3-8492-a0afc545e1dd"],
+Cell[4695, 114, 211, 3, 42, "Input",ExpressionUUID->"f058dbe5-789c-4239-9169-9151138d9eb7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4943, 122, 229, 4, 99, "Section",ExpressionUUID->"b79ef7e1-359a-4a21-a065-3c042e7362ff"],
+Cell[5175, 128, 1007, 25, 213, "Input",ExpressionUUID->"722f6e6f-30d2-43d3-92a5-39901b0512e4"],
+Cell[6185, 155, 10957, 252, 1954, "Input",ExpressionUUID->"34268ad4-b63b-b840-9428-56626b62efbc"],
+Cell[17145, 409, 1616, 41, 213, "Input",ExpressionUUID->"6dca9754-d3ee-49e5-9a1b-5900f01e6396"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
